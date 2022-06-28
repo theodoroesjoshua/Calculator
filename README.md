@@ -89,6 +89,6 @@ Project Link: [https://github.com/theodoroesjoshua/Calculator](https://github.co
 <!-- Credits -->
 ## Credits
 ### Images
-Tab Icon <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
+Favicon <a href="https://www.flaticon.com/free-icons/calculator" title="calculator icons">Calculator icons created by Freepik - Flaticon</a>
   
 <p align="right">(<a href="#top">back to top</a>)</p>
