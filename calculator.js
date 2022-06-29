@@ -1,18 +1,27 @@
-function add(num1, num2) {
-  console.log(num1);
-  console.log(num2);
-  return num1 + num2;
+let num1 = '';
+let num2 = '';
+let operatorStr = '';
+let firstInput = true;
+const screenText = document.querySelector('.screenText');
+screenText.textContent = '0';
+const MAXLENGTH = 9;
+
+function add(numb1, numb2) {
+  return numb1 + numb2;
 }
 
-function substract(num1, num2) {
-  return num1 - num2;
+function substract(numb1, numb2) {
+  return numb1 - numb2;
 }
 
-function multiply(num1, num2) {
-  return num1 * num2;
+function multiply(numb1, numb2) {
+  return numb1 * numb2;
 }
 
-function divide(num1, num2) {
+function divide(numb1, numb2) {
+  if (numb2 === 0) {
+    return 'error';
+  }
   return num1 / num2;
 }
 
@@ -25,22 +34,14 @@ function operate(operator, num1, num2) {
   if (operator === '-') {
     return substract(firstNum, secondNum);
   }
-  if (operator === '*') {
+  if (operator === 'x') {
     return multiply(firstNum, secondNum);
   }
-  if (operator === '/') {
+  if (operator === '÷') {
     return divide(firstNum, secondNum);
   }
   return 0;
 }
-
-let num1 = '';
-let num2 = '';
-let operatorStr = '';
-let firstInput = true;
-const screenText = document.querySelector('.screenText');
-screenText.textContent = '0';
-const MAXLENGTH = 9;
 
 function putToScreen(str) {
   if (str.length < MAXLENGTH) {
@@ -65,10 +66,18 @@ const inputs = document.querySelectorAll('.number');
 inputs.forEach((input) => {
   input.addEventListener('click', () => {
     if (firstInput) {
-      num1 += input.textContent;
+      if (num1 === '0') {
+        num1 = input.textContent;
+      } else {
+        num1 += input.textContent;
+      }
       putToScreen(num1);
     } else {
-      num2 += input.textContent;
+      if (num2 === '0') {
+        num2 = input.textContent;
+      } else {
+        num2 += input.textContent;
+      }
       putToScreen(num2);
     }
   });
@@ -81,20 +90,25 @@ operators.forEach((operator) => {
       case '+':
       case '-':
       case 'x':
-      case '/':
+      case '÷':
         if (firstInput) {
           firstInput = false;
           operatorStr = operator.textContent;
           putToScreen('0');
-        } else {
+        } else if (num2 !== '') {
           num1 = operate(operatorStr, num1, num2).toString();
+          if (num1 === 'error') {
+            num1 = '';
+            firstInput = true;
+            operatorStr = '';
+          }
           num2 = '';
           putToScreen(num1);
           operatorStr = operator.textContent;
         }
         break;
       case '=':
-        equals();
+        if (num2 !== '') equals();
         break;
       default:
         break;
@@ -113,9 +127,11 @@ specials.forEach((specialOperator) => {
       screenText.textContent = '0';
       putToScreen('0');
     } else if (firstInput) {
-      num1 = num1.slice(0, num1.length - 1);
-      putToScreen(num1);
-    } else {
+      if (num1 !== '') {
+        num1 = num1.slice(0, num1.length - 1);
+        putToScreen(num1);
+      }
+    } else if (num2 !== '') {
       num2 = num2.slice(0, num2.length - 1);
       putToScreen(num2);
     }
