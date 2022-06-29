@@ -28,3 +28,30 @@ function operate(operator, num1, num2) {
     return divide(num1, num2);
   }
 }
+
+const screenText = document.querySelector('.screenText');
+screenText.textContent = '0';
+const MAXLENGTH = 9;
+
+function addToScreen(str) {
+  if (screenText.textContent.length < MAXLENGTH) {
+    if (screenText.textContent === '0') {
+      screenText.textContent = str;
+    } else {
+      screenText.textContent += str;
+    }
+  }
+}
+
+function putToScreen(str) {
+  if (str.length < MAXLENGTH) {
+    screenText.textContent = str.slice(0, MAXLENGTH);
+  }
+}
+
+const inputs = document.querySelectorAll('.number');
+inputs.forEach((input) => {
+  input.addEventListener('click', () => {
+    addToScreen(input.textContent);
+  });
+});
