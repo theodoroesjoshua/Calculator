@@ -1,0 +1,95 @@
+body {
+    height: 90vh;
+    margin: auto;
+    text-align: center;    
+    display: flex;
+}
+
+.calculator {
+    flex-direction: column;    
+    width: 30vw;
+    height: 70vh;
+    margin: auto auto;
+    align-items: center;
+}
+
+.display {
+    background-color: lightblue;
+    color: black;
+    height: 20%;    
+    border-style: solid;
+    border-color: black;
+    border-width: medium;
+    padding: 2% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen {
+    width: 80%;
+    height: 80%;
+    text-align: right;
+    border-style: solid;
+    border-color: black;
+    border-width: medium;
+    border-radius: 5px;
+    background-color: lightgrey;
+}
+
+.buttons {
+    display: flex;
+    flex: 1;
+    height: 80%;
+    background-color: lightseagreen;
+    border-style: solid;
+    border-width: medium;
+    border-radius: 5px;
+    border-color: black;
+}
+
+.column1,
+.column2,
+.column3,
+.column4,
+.column5 {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    width: 30px;
+    gap: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.number,
+.decimal, 
+.operator, 
+.special {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgrey;
+    border-style: solid;
+    border-width: medium;
+    border-radius: 5px;
+    border-color: black;
+    width: 80%;
+    font-weight: 800;
+}
+
+.operator {
+    background-color: lightpink;
+}
+
+.special {
+    background-color: coral;
+}
+
+.footer {
+    position: sticky;
+    bottom: 0;
+}
+
