@@ -29,12 +29,20 @@ body {
 .screen {
     width: 80%;
     height: 80%;
-    text-align: right;
     border-style: solid;
     border-color: black;
     border-width: medium;
     border-radius: 5px;
     background-color: lightgrey;
+    display: flex;   
+}
+
+.screenText {
+    text-align: end;
+    font-weight: 600;
+    flex: 1;
+    font-size: 5vw;
+    bottom: 0;
 }
 
 .buttons {
@@ -64,7 +72,6 @@ body {
 }
 
 .number,
-.decimal, 
 .operator, 
 .special {
     display: flex;
