@@ -2,6 +2,7 @@ let num1 = '';
 let num2 = '';
 let operatorStr = '';
 let firstInput = true;
+let afterEquals = false;
 const screenText = document.querySelector('.screenText');
 screenText.textContent = '0';
 const MAXLENGTH = 9;
@@ -63,7 +64,10 @@ function equals() {
   }
   num1 = operate(operatorStr, num1, num2).toString();
   putToScreen(num1);
-  clear();
+  firstInput = true;
+  num2 = '';
+  operatorStr = '';
+  afterEquals = true;
 }
 
 let decimal = false;
@@ -75,7 +79,13 @@ inputs.forEach((input) => {
     if (!decimal && input.textContent === '.') {
       decimal = true;
     }
-    // handle if the first input in num1 or num2 is a decimal
+    // If the user type number directly after equal sign,
+    // we will not use the last result and reset the first number value.
+    if (afterEquals) {
+      num1 = '';
+      afterEquals = false;
+    }
+    // Handle if the first input in num1 or num2 is a decimal
     if (firstInput) {
       if (num1 === '0' && input.textContent !== '.') {
         num1 = input.textContent;
@@ -102,7 +112,13 @@ operators.forEach((operator) => {
       case '-':
       case 'x':
       case '÷':
+        // waiting for new number, of course it doesnt have decimal yet
         decimal = false;
+        // If the user type in an operator after equal sign,
+        // we use the last result as the 1st number
+        if (afterEquals) {
+          afterEquals = false;
+        }
         if (firstInput) {
           firstInput = false;
           operatorStr = operator.textContent;
