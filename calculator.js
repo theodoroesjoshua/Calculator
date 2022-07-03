@@ -62,18 +62,25 @@ function equals() {
   operatorStr = '';
 }
 
+let decimal = false;
 const inputs = document.querySelectorAll('.number');
 inputs.forEach((input) => {
   input.addEventListener('click', () => {
+    // Check if decimal is already there
+    if (decimal && input.textContent === '.') return;
+    if (!decimal && input.textContent === '.') {
+      decimal = true;
+    }
+    // handle if the first input in num1 or num2 is a decimal
     if (firstInput) {
-      if (num1 === '0') {
+      if (num1 === '0' && input.textContent !== '.') {
         num1 = input.textContent;
       } else {
         num1 += input.textContent;
       }
       putToScreen(num1);
     } else {
-      if (num2 === '0') {
+      if (num2 === '0' && input.textContent !== '.') {
         num2 = input.textContent;
       } else {
         num2 += input.textContent;
@@ -91,6 +98,7 @@ operators.forEach((operator) => {
       case '-':
       case 'x':
       case '÷':
+        decimal = false;
         if (firstInput) {
           firstInput = false;
           operatorStr = operator.textContent;
@@ -108,6 +116,7 @@ operators.forEach((operator) => {
         }
         break;
       case '=':
+        decimal = false;
         if (num2 !== '') equals();
         break;
       default:
@@ -126,12 +135,13 @@ specials.forEach((specialOperator) => {
       operatorStr = '';
       screenText.textContent = '0';
       putToScreen('0');
-    } else if (firstInput) {
+    } else if (firstInput) { // else if del is clicked
       if (num1 !== '') {
         if (num1.length === 1) {
           num1 = '';
           putToScreen('0');
         } else {
+          if (num1.charAt(num1.length - 1) === '.') decimal = false;
           num1 = num1.slice(0, num1.length - 1);
           putToScreen(num1);
         }
@@ -141,6 +151,7 @@ specials.forEach((specialOperator) => {
         num2 = '';
         putToScreen('0');
       } else {
+        if (num2.charAt(num2.length - 1) === '.') decimal = false;
         num2 = num2.slice(0, num1.length - 1);
         putToScreen(num2);
       }
