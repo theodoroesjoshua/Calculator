@@ -44,7 +44,7 @@ function operate(operator, numb1, numb2) {
 }
 
 function putToScreen(str) {
-  if (str.length < MAXLENGTH) {
+  if (str.length >= MAXLENGTH) {
     str = str.slice(0, MAXLENGTH);
   }
   screenText.textContent = str;
@@ -128,12 +128,22 @@ specials.forEach((specialOperator) => {
       putToScreen('0');
     } else if (firstInput) {
       if (num1 !== '') {
-        num1 = num1.slice(0, num1.length - 1);
-        putToScreen(num1);
+        if (num1.length === 1) {
+          num1 = '';
+          putToScreen('0');
+        } else {
+          num1 = num1.slice(0, num1.length - 1);
+          putToScreen(num1);
+        }
       }
     } else if (num2 !== '') {
-      num2 = num2.slice(0, num2.length - 1);
-      putToScreen(num2);
+      if (num2.length === 1) {
+        num2 = '';
+        putToScreen('0');
+      } else {
+        num2 = num2.slice(0, num1.length - 1);
+        putToScreen(num2);
+      }
     }
   });
 });
