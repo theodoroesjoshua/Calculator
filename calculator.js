@@ -50,16 +50,20 @@ function putToScreen(str) {
   screenText.textContent = str;
 }
 
+function clear() {
+  num1 = '';
+  num2 = '';
+  firstInput = true;
+  operatorStr = '';
+}
+
 function equals() {
   if (firstInput) {
     return;
   }
   num1 = operate(operatorStr, num1, num2).toString();
   putToScreen(num1);
-  num1 = '';
-  num2 = '';
-  firstInput = true;
-  operatorStr = '';
+  clear();
 }
 
 let decimal = false;
@@ -106,9 +110,8 @@ operators.forEach((operator) => {
         } else if (num2 !== '') {
           num1 = operate(operatorStr, num1, num2).toString();
           if (num1 === 'error') {
-            num1 = '';
-            firstInput = true;
-            operatorStr = '';
+            clear();
+            putToScreen('error');
           }
           num2 = '';
           putToScreen(num1);
@@ -129,11 +132,7 @@ const specials = document.querySelectorAll('.special');
 specials.forEach((specialOperator) => {
   specialOperator.addEventListener('click', () => {
     if (specialOperator.textContent === 'clr') {
-      num1 = '';
-      num2 = '';
-      firstInput = true;
-      operatorStr = '';
-      screenText.textContent = '0';
+      clear();
       putToScreen('0');
     } else if (firstInput) { // else if del is clicked
       if (num1 !== '') {
