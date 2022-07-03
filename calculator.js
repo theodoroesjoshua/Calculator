@@ -26,8 +26,8 @@ function divide(numb1, numb2) {
 }
 
 function operate(operator, numb1, numb2) {
-  const firstNum = parseInt(numb1, 10);
-  const secondNum = parseInt(numb2, 10);
+  const firstNum = parseFloat(numb1, 10);
+  const secondNum = parseFloat(numb2, 10);
   if (operator === '+') {
     return add(firstNum, secondNum);
   }
